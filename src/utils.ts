@@ -22,9 +22,7 @@ export const fetchPosts = async (setPosts: (posts: []) => void) => {
       setPosts(posts);
     }
   } catch (error) {
-    console.log(error);
-  } finally {
-    //setLoading(false);
+    console.error(error);
   }
 };
 
@@ -56,8 +54,6 @@ export const fetchAuthor = async (
       setAuthor(author);
     }
   } catch (error) {
-    console.log(error);
-  } finally {
-    //setLoading(false);
+    console.error(error);
   }
 };

@@ -13,15 +13,11 @@ import { fetchPosts } from "../../utils";
 
 export const Posts = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchPosts(setPosts);
+    fetchPosts(setPosts).then(() => setLoading(false));
   }, []);
-
-  // if (!posts.length) {
-  //   return <div>Loading...</div>;
-  // }
 
   return (
     <PostsOuter>

@@ -10,7 +10,7 @@ interface AuthorProps {
 
 export const Author: FC<AuthorProps> = ({ id }) => {
   const [author, setAuthor] = useState<AuthorType>();
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [ref, inView] = useInView({
     threshold: 0,
@@ -18,13 +18,14 @@ export const Author: FC<AuthorProps> = ({ id }) => {
 
   useEffect(() => {
     if (inView && !author) {
-      fetchAuthor(id, setAuthor);
+      fetchAuthor(id, setAuthor).then(() => setLoading(false));;
     }
   }, [author, id, inView]);
 
   return (
     <StyledAuthor ref={ref}>
-      {author && (
+      {loading && (<div>Loading...</div>)}
+      {author && ! loading && (
         <>
           <AuthorName>{author.name}</AuthorName>
           <AuthorEmail>{author.email}</AuthorEmail>
