@@ -16,7 +16,9 @@ export const Posts = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchPosts(setPosts).then(() => setLoading(false));
+    fetchPosts(setPosts)
+      .then(data => setPosts(data))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -27,7 +29,13 @@ export const Posts = () => {
       ) : (
         <StyledPosts>
           {posts.length &&
-            posts.map((post) => <Post key={post.id} postData={post} />)}
+            posts.map(({ id, title, body, userId }) => (
+              <Post 
+                key={id}
+                title={title}
+                body={body}
+                userId={userId} />
+            ))}
         </StyledPosts>
       )}
     </PostsOuter>

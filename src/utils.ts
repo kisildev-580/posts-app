@@ -1,5 +1,3 @@
-import { AuthorType } from './types';
-
 /**
  * fetchPosts
  * @param {object} state an object containing functions to update component state
@@ -8,7 +6,7 @@ import { AuthorType } from './types';
 
 export const fetchPosts = async (setPosts: (posts: []) => void) => {
   try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
 
     if (!response.ok) {
       throw new Error(
@@ -16,11 +14,7 @@ export const fetchPosts = async (setPosts: (posts: []) => void) => {
       );
     }
 
-    let posts = await response.json();
-
-    if (posts.length) {
-      setPosts(posts);
-    }
+    return await response.json();
   } catch (error) {
     console.error(error);
   }
@@ -31,10 +25,7 @@ export const fetchPosts = async (setPosts: (posts: []) => void) => {
  * @todo 🤓😎
  */
 
-export const fetchAuthor = async (
-  userId: number,
-  setAuthor: (author: AuthorType) => void
-) => {
+export const fetchAuthor = async (userId: number) => {
   if (!userId) return;
 
   try {
@@ -48,11 +39,7 @@ export const fetchAuthor = async (
       );
     }
 
-    let author = await response.json();
-
-    if (author) {
-      setAuthor(author);
-    }
+    return await response.json();
   } catch (error) {
     console.error(error);
   }

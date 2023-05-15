@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { Posts } from "./components/Posts";
+import { FC } from 'react';
+import { Posts } from './components/Posts';
 
 const App: FC = () => (
-  <div className="app">
+  <div className='app'>
     <Posts />
   </div>
 );

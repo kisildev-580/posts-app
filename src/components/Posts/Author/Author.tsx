@@ -12,20 +12,27 @@ export const Author: FC<AuthorProps> = ({ id }) => {
   const [author, setAuthor] = useState<AuthorType>();
   const [loading, setLoading] = useState(true);
 
-  const [ref, inView] = useInView({
+  const [ref, inView, , observer] = useInView({
     threshold: 0,
   });
 
+
   useEffect(() => {
     if (inView && !author) {
-      fetchAuthor(id, setAuthor).then(() => setLoading(false));;
+      fetchAuthor(id)
+      .then((data) => setAuthor(data))
+      .finally(() => setLoading(false));
     }
-  }, [author, id, inView]);
+
+    return () => {
+      observer?.disconnect();
+    }
+  }, [author, id, inView, observer]);
 
   return (
     <StyledAuthor ref={ref}>
       {loading && (<div>Loading...</div>)}
-      {author && ! loading && (
+      {author && !loading && (
         <>
           <AuthorName>{author.name}</AuthorName>
           <AuthorEmail>{author.email}</AuthorEmail>
