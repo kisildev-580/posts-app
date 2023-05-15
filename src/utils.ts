@@ -4,7 +4,7 @@
  * @note this was added to ensure you don't get blocked, types, etc would be nice!
  */
 
-export const fetchPosts = async (setPosts: (posts: []) => void) => {
+export const fetchPosts = async () => {
   try {
     const response = await fetch("https://jsonplaceholder.typicode.com/posts");
 
